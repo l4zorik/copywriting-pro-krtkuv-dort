@@ -1,47 +1,40 @@
+'use client'
+
+import { useState } from 'react'
+import { ArrowRight, Check, ChevronDown, Minus, Plus, ShoppingBag, Star } from 'lucide-react'
+
+const products = [
+  { name: 'Krtkův dort v kelímku', type: 'Crush-to-go box · 250 g', price: 89, tag: 'Nejoblíbenější', tone: 'cup', description: 'Kakaová hlína, nadýchaný krém a banány. Vezmi si legendu kamkoliv.' },
+  { name: 'Rodinný Krtkův dort', type: 'Dárková krabice · 1 200 g', price: 449, tag: 'Osvědčená klasika', tone: 'cake', description: 'Ruční výroba, poctivé kakao a hromada čokolády pro celou rodinu.' },
+  { name: 'Krtkův nanuk', type: 'Mražená edice · 3 ks', price: 159, tag: 'Ledová novinka', tone: 'ice', description: 'Vanilková zmrzlina, banánový sorbet a kakaová drobenka v jednom.' },
+  { name: 'Extrémní svěžest', type: 'Máta & hořká čokoláda · 250 g', price: 119, tag: 'Limitovaná edice', tone: 'mint', description: 'Tradiční základ s ledovým mentolovým tónem, který pořádně nakopne.' },
+]
+
 export default function Page() {
+  const [cart, setCart] = useState(0)
+  const [activeCategory, setActiveCategory] = useState('Všechny dobroty')
+  const addToCart = () => setCart((count) => count + 1)
+
   return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
+    <main className="min-h-screen overflow-hidden bg-[#f5f0e8] text-[#24150f]">
+      <div className="bg-[#275438] px-5 py-2 text-center text-xs font-medium tracking-wide text-[#f7edcf]">Doprava zdarma při nákupu nad 800 Kč <span className="mx-2 opacity-50">•</span> Vyrobeno s láskou v Česku</div>
+      <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6 lg:px-10">
+        <a href="#top" className="flex items-center gap-3 font-bold tracking-tight"><span className="flex size-10 items-center justify-center rounded-full bg-[#e6b94b] text-xl">K</span><span className="text-lg">KRTKŮV<br/><span className="text-[#9f5b32]">DORT</span></span></a>
+        <nav className="hidden items-center gap-8 text-sm font-medium lg:flex"><a href="#dobroty" className="hover:text-[#9f5b32]">Všechny dobroty</a><a href="#pribeh" className="hover:text-[#9f5b32]">Náš příběh</a><a href="#faq" className="hover:text-[#9f5b32]">Časté dotazy</a></nav>
+        <button onClick={() => document.getElementById('dobroty')?.scrollIntoView({ behavior: 'smooth' })} className="relative flex items-center gap-2 rounded-full border border-[#24150f]/15 bg-[#fffaf1] px-4 py-2.5 text-sm font-semibold transition hover:border-[#9f5b32]"><ShoppingBag data-icon="inline-start" /> Košík <span className="flex size-5 items-center justify-center rounded-full bg-[#9f5b32] text-xs text-white">{cart}</span></button>
+      </header>
+
+      <section id="top" className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-20 pt-8 lg:grid-cols-[1.02fr_.98fr] lg:px-10 lg:pb-28 lg:pt-14">
+        <div className="max-w-xl"><p className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[.22em] text-[#9f5b32]"><span className="h-px w-8 bg-[#9f5b32]"/> Sladká legenda v novém</p><h1 className="font-serif text-5xl leading-[.98] tracking-[-.04em] sm:text-6xl lg:text-7xl">Rozkopej stereotypy.<br/><em className="font-normal text-[#9f5b32]">Zakousni se</em> do legendy.</h1><p className="mt-7 max-w-md text-lg leading-relaxed text-[#604d40]">Poctivý kakaový korpus, šlehačkový krém plný čokoládových hoblin a čerstvé banány. Vrať se do dětství v tom nejlepším balení.</p><div className="mt-8 flex flex-wrap items-center gap-4"><button onClick={() => document.getElementById('dobroty')?.scrollIntoView({ behavior: 'smooth' })} className="group rounded-full bg-[#9f5b32] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#7d4323]">Ulov si svého Krtka <ArrowRight className="ml-2 inline transition group-hover:translate-x-1" /></button><a href="#pribeh" className="text-sm font-bold underline decoration-[#e6b94b] decoration-2 underline-offset-8">Proč je jiný?</a></div><div className="mt-10 flex items-center gap-5 text-sm text-[#604d40]"><div className="flex -space-x-2"><span className="flex size-8 items-center justify-center rounded-full border-2 border-[#f5f0e8] bg-[#dca77d] text-xs">M</span><span className="flex size-8 items-center justify-center rounded-full border-2 border-[#f5f0e8] bg-[#c8d1a4] text-xs">K</span><span className="flex size-8 items-center justify-center rounded-full border-2 border-[#f5f0e8] bg-[#e6b94b] text-xs">J</span></div><span><strong className="text-[#24150f]">4.9/5</strong> od více než 500 mlsounů</span></div></div>
+        <div className="relative mx-auto w-full max-w-lg"><div className="absolute -right-4 top-6 rounded-full bg-[#e6b94b] px-4 py-3 text-center text-xs font-bold uppercase leading-tight tracking-wide shadow-lg sm:right-2"><span className="block text-lg normal-case tracking-normal">100 %</span> ruční výroba</div><div className="absolute -bottom-4 -left-2 z-10 rotate-[-8deg] rounded-xl border-2 border-[#24150f] bg-[#f7edcf] px-4 py-3 font-serif text-lg shadow-[4px_4px_0_#24150f] sm:left-0">Mňam. To je <em>legenda.</em></div><div className="overflow-hidden rounded-[2rem] bg-[#351b12] p-3 shadow-2xl"><img src="/krtkuv-dort-hero.png" alt="Plátek Krtkova dortu s banány a čokoládou" className="aspect-[4/5] w-full rounded-[1.5rem] object-cover" /></div></div>
+      </section>
+
+      <section id="dobroty" className="bg-[#fffaf1] px-5 py-20 lg:px-10 lg:py-24"><div className="mx-auto max-w-7xl"><div className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><p className="mb-3 text-xs font-bold uppercase tracking-[.22em] text-[#9f5b32]">Vyber si svého favorita</p><h2 className="font-serif text-4xl tracking-[-.03em] sm:text-5xl">Dorty, co tě <em className="font-normal text-[#9f5b32]">dostanou.</em></h2></div><div className="flex gap-2 overflow-auto pb-1 text-sm">{['Všechny dobroty', 'Do ruky', 'Rodinné', 'Ledové'].map((category) => <button key={category} onClick={() => setActiveCategory(category)} className={`whitespace-nowrap rounded-full border px-4 py-2 transition ${activeCategory === category ? 'border-[#24150f] bg-[#24150f] text-white' : 'border-[#24150f]/15 hover:border-[#24150f]'}`}>{category}</button>)}</div></div><div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{products.map((product, index) => <article key={product.name} className="group rounded-2xl border border-[#24150f]/10 bg-[#f5f0e8] p-3 transition hover:-translate-y-1 hover:shadow-xl"><div className={`relative flex aspect-[.88] items-end justify-center overflow-hidden rounded-xl ${product.tone === 'mint' ? 'bg-[#b8cdb2]' : product.tone === 'ice' ? 'bg-[#d8e5de]' : product.tone === 'cup' ? 'bg-[#e9c67a]' : 'bg-[#d59b70]'}`}><span className="absolute left-3 top-3 rounded-full bg-[#fffaf1]/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wide">{product.tag}</span><div className={`mb-7 flex items-center justify-center shadow-xl ${product.tone === 'cup' ? 'h-36 w-28 rounded-b-2xl rounded-t-lg bg-[#f7edcf]' : product.tone === 'ice' ? 'h-40 w-24 rounded-2xl bg-[#f7edcf]' : 'h-28 w-40 rounded-2xl bg-[#351b12]'}`}><span className="font-serif text-2xl text-[#e6b94b]">K<span className="text-base">rtkův</span></span></div><div className="absolute bottom-3 left-3 flex gap-1 text-[#e6b94b]"><Star fill="currentColor" data-icon="inline-start"/><Star fill="currentColor" data-icon="inline-start"/><Star fill="currentColor" data-icon="inline-start"/><Star fill="currentColor" data-icon="inline-start"/><Star fill="currentColor" data-icon="inline-start"/></div></div><div className="px-2 pb-2 pt-4"><p className="text-xs font-semibold uppercase tracking-wide text-[#9f5b32]">{product.type}</p><h3 className="mt-1 font-serif text-xl">{product.name}</h3><p className="mt-2 min-h-10 text-sm leading-relaxed text-[#604d40]">{product.description}</p><div className="mt-4 flex items-center justify-between"><span className="font-bold">{product.price} Kč</span><button aria-label={`Přidat ${product.name} do košíku`} onClick={addToCart} className="flex size-9 items-center justify-center rounded-full bg-[#24150f] text-white transition hover:bg-[#9f5b32]"><Plus /></button></div></div></article>)}</div></div></section>
+
+      <section id="pribeh" className="mx-auto grid max-w-7xl gap-12 px-5 py-20 lg:grid-cols-2 lg:items-center lg:px-10 lg:py-28"><div className="relative"><div className="absolute -left-4 -top-5 size-28 rounded-full bg-[#e6b94b] opacity-70"/><div className="relative max-w-md rounded-[2rem] bg-[#275438] p-10 text-[#f7edcf] sm:p-14"><p className="text-xs font-bold uppercase tracking-[.22em] text-[#e6b94b]">Na čem si zakládáme</p><h2 className="mt-5 font-serif text-4xl leading-tight">Žádné zkratky.<br/><em className="font-normal">Jen pořádná</em> dobrota.</h2><div className="mt-8 flex flex-col gap-4 text-sm text-[#dce4c9]"><p><Check className="mr-2 inline text-[#e6b94b]"/> Pravé banány v každé vrstvě</p><p><Check className="mr-2 inline text-[#e6b94b]"/> Kvalitní kakao a čokoláda</p><p><Check className="mr-2 inline text-[#e6b94b]"/> Pečeno ručně, ne z linky</p></div></div></div><div><p className="mb-3 text-xs font-bold uppercase tracking-[.22em] text-[#9f5b32]">Náš příběh</p><h2 className="font-serif text-4xl leading-tight tracking-[-.03em] sm:text-5xl">Krtkův dort, jak ho znáš.<br/><em className="font-normal text-[#9f5b32]">A ještě o trochu líp.</em></h2><p className="mt-6 max-w-lg leading-relaxed text-[#604d40]">Začalo to jedním dortem na narozeninové oslavě. Dnes pečeme legendu do kelímků, krabiček i nanuků. Pořád ale stejně poctivě – s máslem, smetanou a velkou chutí dělat radost.</p><a href="#faq" className="mt-7 inline-flex items-center gap-2 text-sm font-bold underline decoration-[#e6b94b] decoration-2 underline-offset-8">Zjistit víc o výrobě <ArrowRight /></a></div></section>
+
+      <section id="faq" className="border-t border-[#24150f]/10 bg-[#e6b94b] px-5 py-12 lg:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 sm:flex-row sm:items-center"><div><p className="font-serif text-2xl">Máš dotaz k objednávce?</p><p className="mt-1 text-sm text-[#604d40]">Ozvi se, rádi poradíme s výběrem i doručením.</p></div><button className="flex items-center justify-center gap-2 rounded-full bg-[#24150f] px-6 py-3 text-sm font-bold text-white">Napiš nám <ArrowRight /></button></div></section>
+      <footer className="bg-[#24150f] px-5 py-8 text-[#f7edcf] lg:px-10"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm sm:flex-row"><span className="font-bold">KRTKŮV DORT</span><span className="text-[#c6ae98]">Pečeme radost. Jednu vrstvu po druhé.</span><span className="text-[#c6ae98]">© 2026 Krtkův dort</span></div></footer>
     </main>
   )
 }
